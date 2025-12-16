@@ -14,6 +14,10 @@ struct ContentView: View {
             Text("Hey het")
                 .blur(radius: blurAmount)
             Slider(value: $blurAmount, in: 0...20)
+                .onChange(of: blurAmount) {oldValue, newValue in
+                    print("New blur amount: \(newValue)")
+                    
+                }
             Button("Random blur") {
                 blurAmount = Double.random(in: 0...20)
             }
