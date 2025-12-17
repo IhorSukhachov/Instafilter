@@ -41,40 +41,40 @@ struct ContentView: View {
 //                Text("Select a color")
 //            }
 //        }
-        VStack {
-            image?
-                .resizable()
-                .scaledToFit()
-        }
-        .onAppear(perform: loadImage)
+//        VStack {
+//            image?
+//                .resizable()
+//                .scaledToFit()
+//        }
+//        .onAppear(perform: loadImage)
         
         
-        
-        
-        
-        
-    }
-    func loadImage() {
-        let inputImage = UIImage(resource: .example)
-        let beginImage = CIImage(image: inputImage)
-        
-        let context = CIContext()
-        let currentFilter = CIFilter.sepiaTone()
-        
-        currentFilter.inputImage = beginImage
-        currentFilter.intensity = 1
-        
-        guard let outputImage = currentFilter.outputImage else { return }
-        guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else { return }
-        
-        let uiImage = UIImage(cgImage: cgImage)
-        
-        image = Image(uiImage: uiImage)
-        
+        ContentUnavailableView("No content to show", systemImage: "swift")
         
         
         
     }
+//    func loadImage() {
+//        let inputImage = UIImage(resource: .example)
+//        let beginImage = CIImage(image: inputImage)
+//        
+//        let context = CIContext()
+//        let currentFilter = CIFilter.sepiaTone()
+//        
+//        currentFilter.inputImage = beginImage
+//        currentFilter.intensity = 1
+//        
+//        guard let outputImage = currentFilter.outputImage else { return }
+//        guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else { return }
+//        
+//        let uiImage = UIImage(cgImage: cgImage)
+//        
+//        image = Image(uiImage: uiImage)
+//        
+//        
+//        
+//        
+//    }
 }
 
 #Preview {
