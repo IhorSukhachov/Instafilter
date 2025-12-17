@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import CoreImage
+import CoreImage.CIFilterBuiltins
 
 struct ContentView: View {
 //    @State private var blurAmount = 0.0
