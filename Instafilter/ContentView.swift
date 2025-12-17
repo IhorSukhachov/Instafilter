@@ -54,6 +54,7 @@ struct ContentView: View {
     }
     func loadImage() {
         let inputImage = UIImage(resource: .example)
+        let beginImage = CIImage(image: inputImage)
     }
 }
 
