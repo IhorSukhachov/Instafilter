@@ -18,6 +18,7 @@ struct ContentView: View {
     @State private var pickerItems = [PhotosPickerItem]()
     @State private var selectedImages = [Image]()
     var body: some View {
+        let example = Image(.example)
         VStack {
             PhotosPicker(selection: $pickerItems, maxSelectionCount: 6, matching: .any(of: [.images, .not(.screenshots)])) {
                 Label("Select a picture", systemImage: "photo")
@@ -33,6 +34,7 @@ struct ContentView: View {
             ShareLink(item: URL(string: "google.com")!, subject: Text("Learn Swift here"), message: Text("fast and furiouss studying of swift")) {
                 Label("Something about swift", systemImage: "square.and.arrow.up")
             }
+            ShareLink(item: example, preview: SharePreview("Singapore airport", image: example))
         }
         .onChange(of: pickerItems) {
             Task {
