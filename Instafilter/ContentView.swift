@@ -9,8 +9,10 @@ import SwiftUI
 import CoreImage
 import CoreImage.CIFilterBuiltins
 import PhotosUI
+import StoreKit
 
 struct ContentView: View {
+    @Environment(\.requestReview) var requestReview
 //    @State private var blurAmount = 0.0
 //    @State private var showingConfirmation: Bool = false
 //    @State private var backgroundColor: Color = .white
@@ -30,11 +32,14 @@ struct ContentView: View {
                         .scaledToFit()
                 }
             }
-            
-            ShareLink(item: URL(string: "google.com")!, subject: Text("Learn Swift here"), message: Text("fast and furiouss studying of swift")) {
-                Label("Something about swift", systemImage: "square.and.arrow.up")
+            Button("Leave a review") {
+                requestReview()
             }
-            ShareLink(item: example, preview: SharePreview("Singapore airport", image: example))
+            
+//            ShareLink(item: URL(string: "google.com")!, subject: Text("Learn Swift here"), message: Text("fast and furiouss studying of swift")) {
+//                Label("Something about swift", systemImage: "square.and.arrow.up")
+//            }
+//            ShareLink(item: example, preview: SharePreview("Singapore airport", image: example))
         }
         .onChange(of: pickerItems) {
             Task {
