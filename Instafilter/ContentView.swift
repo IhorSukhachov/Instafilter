@@ -19,7 +19,7 @@ struct ContentView: View {
     @State private var selectedImages = [Image]()
     var body: some View {
         VStack {
-            PhotosPicker("Select a picture", selection: $pickerItems, matching: .images)
+            PhotosPicker("Select a picture", selection: $pickerItems, maxSelectionCount: 6, matching: .images)
             ScrollView {
                 ForEach(0..<selectedImages.count, id:\.self)  {i in
                     selectedImages[i]
