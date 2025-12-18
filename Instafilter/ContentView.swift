@@ -29,6 +29,8 @@ struct ContentView: View {
                         .scaledToFit()
                 }
             }
+            
+            ShareLink(item: URL(string: "google.com")!)
         }
         .onChange(of: pickerItems) {
             Task {
