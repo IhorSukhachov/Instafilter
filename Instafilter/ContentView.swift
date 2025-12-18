@@ -30,7 +30,9 @@ struct ContentView: View {
                 }
             }
             
-            ShareLink(item: URL(string: "google.com")!, subject: Text("Learn Swift here"), message: Text("fast and furiouss studying of swift"))
+            ShareLink(item: URL(string: "google.com")!, subject: Text("Learn Swift here"), message: Text("fast and furiouss studying of swift")) {
+                Label("Something about swift", systemImage: "square.and.arrow.up")
+            }
         }
         .onChange(of: pickerItems) {
             Task {
