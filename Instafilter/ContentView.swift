@@ -30,7 +30,7 @@ struct ContentView: View {
                 }
             }
             
-            ShareLink(item: URL(string: "google.com")!)
+            ShareLink(item: URL(string: "google.com")!, subject: Text("Learn Swift here"), message: Text("fast and furiouss studying of swift"))
         }
         .onChange(of: pickerItems) {
             Task {
