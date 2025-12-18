@@ -8,13 +8,24 @@
 import SwiftUI
 import CoreImage
 import CoreImage.CIFilterBuiltins
+import PhotosUI
 
 struct ContentView: View {
 //    @State private var blurAmount = 0.0
 //    @State private var showingConfirmation: Bool = false
 //    @State private var backgroundColor: Color = .white
-    @State private var image: Image?
+   //  @State private var image: Image?
+    @State private var pickerItem: PhotosPickerItem?
+    @State private var selectedImage: Image?
     var body: some View {
+        VStack {
+            PhotosPicker("Select a picture", selection: $pickerItem, matching: .images)
+        }
+        .onChange(of: pickerItem) {
+            Task {
+                selectedImage = try await pickerItem?.loadTransferable(type: Image.self)
+            }
+        }
 //        VStack {
 //            Text("Hey het")
 //                .blur(radius: blurAmount)
@@ -49,7 +60,7 @@ struct ContentView: View {
 //        .onAppear(perform: loadImage)
         
         
-        ContentUnavailableView("No content to show", systemImage: "swift")
+     //   ContentUnavailableView("No content to show", systemImage: "swift")
         
         
         
