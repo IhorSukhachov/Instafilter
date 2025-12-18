@@ -20,6 +20,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
             PhotosPicker("Select a picture", selection: $pickerItem, matching: .images)
+            selectedImage?
+                .resizable()
+                .scaledToFit()
         }
         .onChange(of: pickerItem) {
             Task {
