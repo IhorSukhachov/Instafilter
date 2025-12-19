@@ -13,27 +13,36 @@ struct ContentView: View {
     @State private var filterIntensity = 0.5
     
     var body: some View {
-        VStack {
-            Spacer()
-            
-            //image  area
-            
-            Spacer()
-            
-            HStack {
-                Text("Intensity")
-                Slider(value: $filterIntensity)
-            }
-            
-            HStack {
-                Button("Change filter") {
-                    //some code later
+        NavigationStack {
+            VStack {
+                Spacer()
+                
+                if let processedImage {
+                    processedImage
+                        .resizable()
+                        .scaledToFit()
+                } else {
+                    ContentUnavailableView("No picture", systemImage: "photo.badge.plus", description: Text("Tap to add an image "))
                 }
                 
                 Spacer()
                 
-            }
-        }.padding([.horizontal, .bottom])
+                HStack {
+                    Text("Intensity")
+                    Slider(value: $filterIntensity)
+                }
+                
+                HStack {
+                    Button("Change filter") {
+                        //some code later
+                    }
+                    
+                    Spacer()
+                    
+                }
+            }.padding([.horizontal, .bottom])
+                .navigationTitle("Instafilter ")
+        }
         
         
     }
