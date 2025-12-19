@@ -33,9 +33,7 @@ struct ContentView: View {
                 }
                 
                 HStack {
-                    Button("Change filter") {
-                        //some code later
-                    }
+                    Button("Change filter", action: changeFilter)
                     
                     Spacer()
                     
@@ -46,7 +44,9 @@ struct ContentView: View {
         
         
     }
-    
+    func changeFilter() {
+         
+    }
 }
 
 #Preview {
