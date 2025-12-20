@@ -86,6 +86,11 @@ struct ContentView: View {
         
         
     }
+    
+    func setFilter(_ filter: CIFilter) {
+        currentFilter = filter
+        loadImage()
+    }
 }
 
 #Preview {
