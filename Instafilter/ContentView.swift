@@ -14,7 +14,8 @@ struct ContentView: View {
     @State private var processedImage: Image?
     @State private var filterIntensity = 0.5
     @State private var selectedItem:  PhotosPickerItem?
-    @State private var currentFilter = CIFilter.sepiaTone()
+    @State private var currentFilter: CIFilter = CIFilter.sepiaTone()
+    @State private var showingFilters: Bool = false
     
     let context = CIContext()
     
@@ -50,13 +51,17 @@ struct ContentView: View {
                     
                 }
             }.padding([.horizontal, .bottom])
-                .navigationTitle("Instafilter ")
+                .navigationTitle("Instafilter")
+                .confirmationDialog("Select a filter", isPresented: $showingFilters) {
+                    
+                }
+            
         }
         
         
     }
     func changeFilter() {
-         
+         showingFilters = true
     }
     
     func loadImage() {
@@ -71,7 +76,8 @@ struct ContentView: View {
     }
     
     func applyProcessing(){
-        currentFilter.intensity = Float(filterIntensity)
+        currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey)
+        //currentFilter.intensity = Float(filterIntensity)
         guard let outputImage = currentFilter.outputImage else {return}
         guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else {return}
         
