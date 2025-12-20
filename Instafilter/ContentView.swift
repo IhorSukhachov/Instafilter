@@ -49,6 +49,9 @@ struct ContentView: View {
                     
                     Spacer()
                     
+                    if let processedImage {
+                        ShareLink(item: processedImage, preview: SharePreview("Share image", image: processedImage))
+                    }
                 }
             }.padding([.horizontal, .bottom])
                 .navigationTitle("Instafilter")
