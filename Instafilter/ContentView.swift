@@ -53,7 +53,14 @@ struct ContentView: View {
             }.padding([.horizontal, .bottom])
                 .navigationTitle("Instafilter")
                 .confirmationDialog("Select a filter", isPresented: $showingFilters) {
-                    
+                    Button("Crystallize") {setFilter(CIFilter.crystallize())}
+                    Button("Edges") {setFilter(CIFilter.edges())}
+                    Button("Gaussian blur") {setFilter(CIFilter.gaussianBlur())}
+                    Button("Pixellate") {setFilter(CIFilter.pixellate())}
+                    Button("Sepia tone") {setFilter(CIFilter.sepiaTone())}
+                    Button("Unsharp mask") {setFilter(CIFilter.unsharpMask())}
+                    Button("Vignette") {setFilter(CIFilter.vignette())}
+                    Button("Cancel", role: .cancel) {}
                 }
             
         }
