@@ -17,6 +17,14 @@ struct ContentView: View {
     @State private var selectedItem:  PhotosPickerItem?
     @State private var currentFilter: CIFilter = CIFilter.sepiaTone()
     @State private var showingFilters: Bool = false
+    var disableButton: Bool {
+        if selectedItem == nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     
     @AppStorage("filterCount") var filterCount = 0
     @Environment(\.requestReview) var requestReview
@@ -42,21 +50,24 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                HStack {
-                    Text("Intensity")
-                    Slider(value: $filterIntensity)
-                        .onChange(of: filterIntensity, applyProcessing)
-                }
-                
-                HStack {
-                    Button("Change filter", action: changeFilter)
-                    
-                    Spacer()
-                    
-                    if let processedImage {
-                        ShareLink(item: processedImage, preview: SharePreview("Share image", image: processedImage))
+                Section {
+                    HStack {
+                        Text("Intensity")
+                        Slider(value: $filterIntensity)
+                            .onChange(of: filterIntensity, applyProcessing)
                     }
-                }
+                    
+                    HStack {
+                        Button("Change filter", action: changeFilter)
+                        
+                        Spacer()
+                        
+                        if let processedImage {
+                            ShareLink(item: processedImage, preview: SharePreview("Share image", image: processedImage))
+                        }
+                    }
+                }.disabled(disableButton)
+
             }.padding([.horizontal, .bottom])
                 .navigationTitle("Instafilter")
                 .confirmationDialog("Select a filter", isPresented: $showingFilters) {
