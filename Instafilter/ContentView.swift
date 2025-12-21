@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var processedImage: Image?
     @State private var filterIntensity = 0.5
     @State private var filterRadius = 0.5
+    @State private var scaleAmount = 0.5
     @State private var selectedItem:  PhotosPickerItem?
     @State private var currentFilter: CIFilter = CIFilter.sepiaTone()
     @State private var showingFilters: Bool = false
@@ -65,6 +66,12 @@ struct ContentView: View {
                     }
                     
                     HStack {
+                        Text("Scale")
+                        Slider(value: $scaleAmount)
+                            .onChange(of: scaleAmount, applyProcessing)
+                    }
+                    
+                    HStack {
                         Button("Change filter", action: changeFilter)
                         
                         Spacer()
@@ -78,6 +85,9 @@ struct ContentView: View {
             }.padding([.horizontal, .bottom])
                 .navigationTitle("Instafilter")
                 .confirmationDialog("Select a filter", isPresented: $showingFilters) {
+                    Button("Bloom") { setFilter(CIFilter.bloom()) }
+                    Button("Motion Blur") { setFilter(CIFilter.motionBlur()) }
+                    Button("Monochrome") { setFilter(CIFilter.colorMonochrome()) }
                     Button("Crystallize") {setFilter(CIFilter.crystallize())}
                     Button("Edges") {setFilter(CIFilter.edges())}
                     Button("Gaussian blur") {setFilter(CIFilter.gaussianBlur())}
@@ -112,7 +122,7 @@ struct ContentView: View {
         
         if inputKeys.contains(kCIInputIntensityKey) {currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey)}
         if inputKeys.contains(kCIInputRadiusKey) {currentFilter.setValue(filterRadius * 200, forKey: kCIInputRadiusKey)}
-        if inputKeys.contains(kCIInputScaleKey) {currentFilter.setValue(filterIntensity * 10, forKey: kCIInputScaleKey)}
+        if inputKeys.contains(kCIInputScaleKey) {currentFilter.setValue(scaleAmount * 10, forKey: kCIInputScaleKey)}
         //currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey)
         //currentFilter.intensity = Float(filterIntensity)
         guard let outputImage = currentFilter.outputImage else {return}
